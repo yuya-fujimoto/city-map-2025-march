@@ -1,0 +1,26 @@
+{
+  // Imports
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "javascript.updateImportsOnFileMove.enabled": "always",
+  "javascript.preferences.importModuleSpecifier": "relative",
+  // Indentation
+  "editor.tabSize": 2,
+  "editor.detectIndentation": false,
+  // GraphQL
+  "vscode-graphql.useSchemaFileDefinitions": false,
+  // Formatter
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "editor.formatOnSave": true,
+  // Prettier and eslint
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": "explicit",
+    "source.fixAll.tslint": "explicit",
+    "source.fixAll.stylelint": "explicit"
+  },
+  "prettier.requireConfig": true,
+  "eslint.validate": ["javascript", "javascriptreact", "html", "markdown", "typescript", "typescriptreact"],
+  "eslint.run": "onSave"
+}
