@@ -16,24 +16,19 @@ import { useEffect } from 'react';
 
 import appStylesHref from './app.css?url';
 
-import { createEmptyContact, getContacts } from './data';
+import { getCities } from './data';
 
 export const links: LinksFunction = () => [{ rel: 'stylesheet', href: appStylesHref }];
-
-export const action = async () => {
-  const contact = await createEmptyContact();
-  return redirect(`/contacts/${contact.id}/edit`);
-};
 
 export const loader = async ({ request }: LoaderFunctionArgs) => {
   const url = new URL(request.url);
   const q = url.searchParams.get('q');
-  const contacts = await getContacts(q);
-  return json({ contacts, q });
+  const cities = await getCities(q);
+  return json({ cities, q });
 };
 
 export default function App() {
-  const { contacts, q } = useLoaderData<typeof loader>();
+  const { cities, q } = useLoaderData<typeof loader>();
   const navigation = useNavigation();
   const submit = useSubmit();
   const searching = navigation.location && new URLSearchParams(navigation.location.search).has('q');
@@ -55,7 +50,7 @@ export default function App() {
       </head>
       <body>
         <div id="sidebar">
-          <h1>Remix Contacts</h1>
+          <h1>Build Project Cities</h1>
           <div>
             <Form
               id="search-form"
@@ -83,29 +78,22 @@ export default function App() {
             </Form>
           </div>
           <nav>
-            {contacts.length ? (
+            {cities.length ? (
               <ul>
-                {contacts.map((contact) => (
-                  <li key={contact.id}>
+                {cities.map((city) => (
+                  <li key={city.id}>
                     <NavLink
                       className={({ isActive, isPending }) => (isActive ? 'active' : isPending ? 'pending' : '')}
-                      to={`contacts/${contact.id}`}
+                      to={`cities/${city.id}`}
                     >
-                      {contact.first || contact.last ? (
-                        <>
-                          {contact.first} {contact.last}
-                        </>
-                      ) : (
-                        <i>No Name</i>
-                      )}{' '}
-                      {contact.favorite ? <span>★</span> : null}
+                      {city.name ? <>{city.name}</> : <i>No Name</i>}{' '}
                     </NavLink>
                   </li>
                 ))}
               </ul>
             ) : (
               <p>
-                <i>No contacts</i>
+                <i>No cities</i>
               </p>
             )}
           </nav>
