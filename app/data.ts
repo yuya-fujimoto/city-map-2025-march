@@ -130,6 +130,14 @@ export async function deleteCity(id: string) {
       long: -80.1918,
     },
   },
+  {
+    id: '6',
+    name: 'San Francisco',
+    location: {
+      lat: 37.7749,
+      long: -122.4194,
+    },
+  },
 ].forEach((city) => {
   fakeCities.create({
     ...city,

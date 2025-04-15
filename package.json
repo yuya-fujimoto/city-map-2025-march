@@ -12,9 +12,11 @@
     "format": "prettier --write ."
   },
   "dependencies": {
+    "@deck.gl/aggregation-layers": "^9.1.9",
     "@remix-run/node": "^2.16.4",
     "@remix-run/react": "^2.16.4",
     "@remix-run/serve": "^2.16.4",
+    "deck.gl": "^9.1.9",
     "isbot": "^4.1.0",
     "mapbox-gl": "^2.15.0",
     "match-sorter": "^6.3.1",
