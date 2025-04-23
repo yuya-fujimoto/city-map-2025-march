@@ -7,13 +7,21 @@ import { matchSorter } from 'match-sorter';
 import sortBy from 'sort-by';
 import invariant from 'tiny-invariant';
 
-type CityMutation = {
+export type CityMutation = {
   id: string;
   name: string;
+  dataUrl: string;
   location: {
     lat: number;
     long: number;
   };
+  layer: 'HexagonLayer' | 'LineLayer';
+};
+
+export type BikeRack = {
+  ADDRESS: string;
+  SPACES: number;
+  COORDINATES: [longitude: number, latitude: number];
 };
 
 export type ContactRecord = CityMutation & {
@@ -93,50 +101,62 @@ export async function deleteCity(id: string) {
   {
     id: '1',
     name: 'New York',
+    dataUrl: 'https://data.cityofnewyork.us/resource/uvpi-gqnh.json?$limit=5000&boroname=Manhattan',
     location: {
       lat: 40.7128,
       long: -74.006,
     },
+    layer: 'HexagonLayer',
   },
   {
     id: '2',
     name: 'Los Angeles',
+    dataUrl: '',
     location: {
       lat: 34.0522,
       long: -118.2437,
     },
+    layer: 'HexagonLayer',
   },
   {
     id: '3',
     name: 'Chicago',
+    dataUrl: '',
     location: {
       lat: 41.8781,
       long: -87.6298,
     },
+    layer: 'HexagonLayer',
   },
   {
     id: '4',
     name: 'Houston',
+    dataUrl: '',
     location: {
       lat: 29.7604,
       long: -95.3698,
     },
+    layer: 'HexagonLayer',
   },
   {
     id: '5',
     name: 'Miami',
+    dataUrl: '',
     location: {
       lat: 25.7617,
       long: -80.1918,
     },
+    layer: 'HexagonLayer',
   },
   {
     id: '6',
     name: 'San Francisco',
+    dataUrl: 'https://raw.githubusercontent.com/visgl/deck.gl-data/master/website/sf-bike-parking.json',
     location: {
       lat: 37.7749,
       long: -122.4194,
     },
+    layer: 'HexagonLayer',
   },
 ].forEach((city) => {
   fakeCities.create({

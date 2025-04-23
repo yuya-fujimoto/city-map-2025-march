@@ -2,35 +2,55 @@ import { Map as MapGL } from 'react-map-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import { useEffect, useState } from 'react';
 import DeckGL from '@deck.gl/react';
-import { HexagonLayer, HexagonLayerPickingInfo } from '@deck.gl/aggregation-layers';
+import { HexagonLayer } from '@deck.gl/aggregation-layers';
+import { CityMutation } from '~/data';
+import { LineLayer } from 'deck.gl';
 
 const MAPBOX_ACCESS_TOKEN =
   'pk.eyJ1IjoieXV5YWZ1amltb3RvIiwiYSI6ImNsbm5wNXVwMzA3Y3Iya3Ftd2c1MW92djkifQ.gJHn2MuzuWqhlTnVg018Eg';
 
-type City = {
-  id: string;
-  name: string;
-  location: {
-    lat: number;
-    long: number;
-  };
-};
 interface MapComponentProps {
   initialZoom?: number;
   mapStyle?: string;
-  city: City;
+  city: CityMutation;
+  mapboxAccessToken: string;
 }
 
-type BikeRack = {
+type CityDataFromUrl = {
   ADDRESS: string;
   SPACES: number;
   COORDINATES: [longitude: number, latitude: number];
+};
+
+const Layers: Record<'HexagonLayer' | 'LineLayer', typeof HexagonLayer | typeof LineLayer> = {
+  HexagonLayer: HexagonLayer,
+  LineLayer: LineLayer,
+};
+
+type SupportedCityDataTypes = {
+  '1': CityDataFromUrl;
+};
+
+const getPositionFunctionPicker = <T extends keyof SupportedCityDataTypes>(cityId: T) => {
+  switch (cityId) {
+    case '1':
+      return (d: T) => {
+        // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-expect-error
+        return [parseFloat(d.longitude), parseFloat(d.latitude)];
+      };
+    default:
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-expect-error
+      return (d: T) => d.COORDINATES;
+  }
 };
 
 export default function MapComponent({
   initialZoom = 12,
   mapStyle = 'mapbox://styles/mapbox/streets-v11',
   city,
+  mapboxAccessToken,
 }: MapComponentProps) {
   const [viewState, setViewState] = useState({
     longitude: city.location.long,
@@ -38,15 +58,19 @@ export default function MapComponent({
     zoom: initialZoom,
   });
 
+  const SelectedLayer = Layers[city.layer];
+
   const layers = [
-    new HexagonLayer<BikeRack>({
-      id: 'HexagonLayer',
-      data: 'https://raw.githubusercontent.com/visgl/deck.gl-data/master/website/sf-bike-parking.json',
+    new SelectedLayer<CityDataFromUrl>({
+      id: city.layer,
+      data: city.dataUrl,
       gpuAggregation: true,
       extruded: true,
-      getPosition: (d: BikeRack) => d.COORDINATES,
-      getColorWeight: (d: BikeRack) => d.SPACES,
-      getElevationWeight: (d: BikeRack) => d.SPACES,
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-expect-error
+      getPosition: getPositionFunctionPicker<CityDataFromUrl>(city.id),
+      // getColorWeight: 1,
+      // getElevationWeight: (d: CityDataFromUrl) => d.SPACES,
       elevationScale: 4,
       radius: 200,
       pickable: true,
@@ -63,7 +87,7 @@ export default function MapComponent({
 
   return (
     <DeckGL layers={layers} initialViewState={viewState} controller={true}>
-      <MapGL mapboxAccessToken={MAPBOX_ACCESS_TOKEN} mapStyle={mapStyle} onMove={(e) => setViewState(e.viewState)} />
+      <MapGL mapboxAccessToken={mapboxAccessToken} mapStyle={mapStyle} onMove={(e) => setViewState(e.viewState)} />
     </DeckGL>
   );
 }

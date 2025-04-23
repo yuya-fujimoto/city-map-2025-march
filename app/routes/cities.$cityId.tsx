@@ -1,7 +1,7 @@
 import { json, LoaderFunctionArgs } from '@remix-run/node';
-import { useLoaderData, useParams } from '@remix-run/react';
+import { useLoaderData } from '@remix-run/react';
 import MapComponent from '~/components/map';
-import { getCities, getCity } from '~/data';
+import { getCity } from '~/data';
 
 // what city it is
 // we need to know the location (lat, long) of the city
@@ -15,11 +15,11 @@ export const loader = async ({ params }: LoaderFunctionArgs) => {
   if (!city) {
     throw new Error('City not found');
   }
-  return json({ city });
+  return json({ city, mapboxAccessToken: process.env.MAPBOX_ACCESS_TOKEN });
 };
 
 export default function City() {
-  const { city } = useLoaderData<typeof loader>();
+  const { city, mapboxAccessToken } = useLoaderData<typeof loader>();
 
   return (
     <div
@@ -34,7 +34,7 @@ export default function City() {
         display: 'block',
       }}
     >
-      <MapComponent city={city} />
+      <MapComponent city={city} mapboxAccessToken={mapboxAccessToken} />
     </div>
   );
 }
