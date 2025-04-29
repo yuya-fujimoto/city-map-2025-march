@@ -6,9 +6,6 @@ import { HexagonLayer } from '@deck.gl/aggregation-layers';
 import { CityMutation } from '~/data';
 import { LineLayer } from 'deck.gl';
 
-const MAPBOX_ACCESS_TOKEN =
-  'pk.eyJ1IjoieXV5YWZ1amltb3RvIiwiYSI6ImNsbm5wNXVwMzA3Y3Iya3Ftd2c1MW92djkifQ.gJHn2MuzuWqhlTnVg018Eg';
-
 interface MapComponentProps {
   initialZoom?: number;
   mapStyle?: string;

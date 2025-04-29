@@ -16,6 +16,9 @@ export type CityMutation = {
     long: number;
   };
   layer: 'HexagonLayer' | 'LineLayer';
+  dataTitle: string;
+  dataDescription: string;
+  dataSourceUrl: string;
 };
 
 export type BikeRack = {
@@ -107,6 +110,10 @@ export async function deleteCity(id: string) {
       long: -74.006,
     },
     layer: 'HexagonLayer',
+    dataTitle: '2015 Street Tree Census - Tree Data',
+    dataDescription:
+      'Street tree data from the TreesCount! 2015 Street Tree Census, conducted by volunteers and staff organized by NYC Parks & Recreation and partner organizations. Tree data collected includes tree species, diameter and perception of health. Accompanying blockface data is available indicating status of data collection and data release citywide.',
+    dataSourceUrl: 'https://data.cityofnewyork.us/Environment/2015-Street-Tree-Census-Tree-Data/uvpi-gqnh/about_data',
   },
   {
     id: '2',
@@ -117,6 +124,10 @@ export async function deleteCity(id: string) {
       long: -118.2437,
     },
     layer: 'HexagonLayer',
+    dataTitle: '2015 Street Tree Census - Tree Data',
+    dataDescription:
+      'Street tree data from the TreesCount! 2015 Street Tree Census, conducted by volunteers and staff organized by NYC Parks & Recreation and partner organizations. Tree data collected includes tree species, diameter and perception of health. Accompanying blockface data is available indicating status of data collection and data release citywide.',
+    dataSourceUrl: 'https://data.cityofnewyork.us/Environment/2015-Street-Tree-Census-Tree-Data/uvpi-gqnh/about_data',
   },
   {
     id: '3',
@@ -127,6 +138,10 @@ export async function deleteCity(id: string) {
       long: -87.6298,
     },
     layer: 'HexagonLayer',
+    dataTitle: '2015 Street Tree Census - Tree Data',
+    dataDescription:
+      'Street tree data from the TreesCount! 2015 Street Tree Census, conducted by volunteers and staff organized by NYC Parks & Recreation and partner organizations. Tree data collected includes tree species, diameter and perception of health. Accompanying blockface data is available indicating status of data collection and data release citywide.',
+    dataSourceUrl: 'https://data.cityofnewyork.us/Environment/2015-Street-Tree-Census-Tree-Data/uvpi-gqnh/about_data',
   },
   {
     id: '4',
@@ -137,6 +152,10 @@ export async function deleteCity(id: string) {
       long: -95.3698,
     },
     layer: 'HexagonLayer',
+    dataTitle: '2015 Street Tree Census - Tree Data',
+    dataDescription:
+      'Street tree data from the TreesCount! 2015 Street Tree Census, conducted by volunteers and staff organized by NYC Parks & Recreation and partner organizations. Tree data collected includes tree species, diameter and perception of health. Accompanying blockface data is available indicating status of data collection and data release citywide.',
+    dataSourceUrl: 'https://data.cityofnewyork.us/Environment/2015-Street-Tree-Census-Tree-Data/uvpi-gqnh/about_data',
   },
   {
     id: '5',
@@ -147,6 +166,10 @@ export async function deleteCity(id: string) {
       long: -80.1918,
     },
     layer: 'HexagonLayer',
+    dataTitle: '2015 Street Tree Census - Tree Data',
+    dataDescription:
+      'Street tree data from the TreesCount! 2015 Street Tree Census, conducted by volunteers and staff organized by NYC Parks & Recreation and partner organizations. Tree data collected includes tree species, diameter and perception of health. Accompanying blockface data is available indicating status of data collection and data release citywide.',
+    dataSourceUrl: 'https://data.cityofnewyork.us/Environment/2015-Street-Tree-Census-Tree-Data/uvpi-gqnh/about_data',
   },
   {
     id: '6',
@@ -157,6 +180,10 @@ export async function deleteCity(id: string) {
       long: -122.4194,
     },
     layer: 'HexagonLayer',
+    dataTitle: '2015 Street Tree Census - Tree Data',
+    dataDescription:
+      'Street tree data from the TreesCount! 2015 Street Tree Census, conducted by volunteers and staff organized by NYC Parks & Recreation and partner organizations. Tree data collected includes tree species, diameter and perception of health. Accompanying blockface data is available indicating status of data collection and data release citywide.',
+    dataSourceUrl: 'https://data.cityofnewyork.us/Environment/2015-Street-Tree-Census-Tree-Data/uvpi-gqnh/about_data',
   },
 ].forEach((city) => {
   fakeCities.create({

@@ -1,5 +1,6 @@
 import { json, LoaderFunctionArgs } from '@remix-run/node';
 import { useLoaderData } from '@remix-run/react';
+import { DataCard } from '~/components/data-card';
 import MapComponent from '~/components/map';
 import { getCity } from '~/data';
 
@@ -15,7 +16,11 @@ export const loader = async ({ params }: LoaderFunctionArgs) => {
   if (!city) {
     throw new Error('City not found');
   }
-  return json({ city, mapboxAccessToken: process.env.MAPBOX_ACCESS_TOKEN });
+  const mapboxAccessToken = process.env.MAPBOX_ACCESS_TOKEN;
+  if (!mapboxAccessToken) {
+    throw new Error('Mapbox access token is required');
+  }
+  return json({ city, mapboxAccessToken });
 };
 
 export default function City() {
@@ -34,6 +39,7 @@ export default function City() {
         display: 'block',
       }}
     >
+      <DataCard title={city.dataTitle} description={city.dataDescription} dataSourceUrl={city.dataSourceUrl} />
       <MapComponent city={city} mapboxAccessToken={mapboxAccessToken} />
     </div>
   );
