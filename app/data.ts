@@ -117,17 +117,18 @@ export async function deleteCity(id: string) {
   },
   {
     id: '2',
-    name: 'Los Angeles',
-    dataUrl: '',
+    name: 'Grand Rapids',
+    dataUrl:
+      'https://services2.arcgis.com/L81TiOwAPO1ZvU9b/arcgis/rest/services/Traffic_Crashes/FeatureServer/0/query?f=json&where=1%3D1&outFields=*&returnGeometry=false&resultRecordCount=5000',
     location: {
-      lat: 34.0522,
-      long: -118.2437,
+      lat: 42.9634,
+      long: -85.6681,
     },
     layer: 'HexagonLayer',
-    dataTitle: '2015 Street Tree Census - Tree Data',
-    dataDescription:
-      'Street tree data from the TreesCount! 2015 Street Tree Census, conducted by volunteers and staff organized by NYC Parks & Recreation and partner organizations. Tree data collected includes tree species, diameter and perception of health. Accompanying blockface data is available indicating status of data collection and data release citywide.',
-    dataSourceUrl: 'https://data.cityofnewyork.us/Environment/2015-Street-Tree-Census-Tree-Data/uvpi-gqnh/about_data',
+    dataTitle: 'Traffic Crash Raw Data Set',
+    dataDescription: 'GRAND RAPIDS POLICE DEPARTMENT',
+    dataSourceUrl:
+      'https://services2.arcgis.com/L81TiOwAPO1ZvU9b/arcgis/rest/services/Traffic_Crashes/FeatureServer/0/query?outFields=*&where=1%3D1&f=json',
   },
   {
     id: '3',
